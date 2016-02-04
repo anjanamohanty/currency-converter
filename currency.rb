@@ -1,8 +1,21 @@
 class Currency
 
-  def initialize(amount, currency_code)
-    @amount = amount
+  def initialize(amount, currency_code = "")
+    @amount = amount.to_s
     @code = currency_code
+
+    self.convert_input
+  end
+
+  def convert_input
+    symbol_hash = {"$" => "USD"}
+
+    @amount.each_char do |x|
+      if symbol_hash[x]
+        @code = symbol_hash[x].to_s
+        @amount.tr!(x, "").to_i
+      end
+    end
   end
 
   def amount
