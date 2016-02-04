@@ -25,7 +25,7 @@ class Currency
     if @code == other.code
       @amount += other.amount
     else
-      puts "Mismatched currency codes"
+      raise DifferentCurrencyCodeError
     end
   end
 
@@ -33,10 +33,16 @@ class Currency
     if @code == other.code
       @amount -= other.amount
     else
-      puts "Mismatched currency codes"
+      raise DifferentCurrencyCodeError
     end
   end
 
+end
+
+class DifferentCurrencyCodeError < StandardError
+  def initialize(msg="Cannot add or subtract currencies with different codes")
+    super
+  end
 end
 
 
