@@ -8,6 +8,7 @@ class Currency
   def amount
     @amount
   end
+
   def code
     @code
   end
@@ -20,6 +21,10 @@ class Currency
     end
   end
 
-
-
 end
+
+
+usd_one = Currency.new(10, :USD)
+usd_two = Currency.new(15, :USD)
+
+puts usd_one.equals?(usd_two)
