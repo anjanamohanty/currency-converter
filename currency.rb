@@ -8,7 +8,7 @@ class Currency
   end
 
   def convert_input
-    symbol_hash = {"$" => "USD", "€" => "EUR"}
+    symbol_hash = {"$" => "USD", "€" => "EUR", "¥" => "JPY"}
 
     @amount.each_char do |x|
       if symbol_hash[x]
