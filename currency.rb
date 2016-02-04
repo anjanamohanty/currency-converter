@@ -37,6 +37,11 @@ class Currency
     end
   end
 
+  def multiply(number)
+    @amount = @amount * number
+    return self
+  end
+
 end
 
 class DifferentCurrencyCodeError < StandardError
@@ -54,5 +59,4 @@ puts usd_one.equals?(usd_two)
 puts usd_one.equals?(cad_one)
 puts usd_one.add(usd_two)
 
-puts usd_one.subtract(usd_two)
-puts usd_one.subtract(cad_one)
+puts usd_one.multiply(5).amount
