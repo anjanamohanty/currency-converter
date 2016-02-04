@@ -1,6 +1,6 @@
 class CurrencyConverter
   def initialize
-    @rates = {USD: 1.00, EUR: 0.74}
+    @rates = {USD: 1.00, EUR: 0.74, JPY: 120.0, CAD: 1.37}
   end
 
   def find_rate(code)
