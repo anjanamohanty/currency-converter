@@ -19,40 +19,28 @@ class Currency
   end
 
   def amount
-    return @amount
+    @amount
   end
 
   def code
-    return @code
+    @code
   end
 
   def equals?(other)
-    if (@amount == other.amount) && (@code == other.code)
-      true
-    else
-      false
-    end
+    (@amount == other.amount) && (@code == other.code) ? true : false
   end
 
   def add(other)
-    if @code == other.code
-      @amount += other.amount
-    else
-      raise DifferentCurrencyCodeError
-    end
+    (@code == other.code) ? (@amount += other.amount) : (raise DifferentCurrencyCodeError)
   end
 
   def subtract(other)
-    if @code == other.code
-      @amount -= other.amount
-    else
-      raise DifferentCurrencyCodeError
-    end
+    (@code == other.code) ? (@amount -= other.amount) : (raise DifferentCurrencyCodeError)
   end
 
   def multiply(number)
     @amount = @amount * number
-    return self
+    self
   end
 
 end
