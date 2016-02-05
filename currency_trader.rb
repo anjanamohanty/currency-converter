@@ -5,7 +5,11 @@ class CurrencyTrader
     @currency = currency
   end
 
-  def suggest_trade
+  def trade
+    good_rates = {}
+    @converter_one.rates.each{ |key, value|
+      (@converter_one.rates[key] > @converter_two.rates[key]) ? (good_rates[key] = ((@converter_one.rates[key] / @converter_one.rates[@currency.code.to_sym]) * (@converter_two.rates[@currency.code.to_sym] / @converter_two.rates[key]))) : next
+    }
+    return good_rates.key(good_rates.values.max)
   end
-
 end

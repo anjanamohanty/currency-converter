@@ -1,7 +1,13 @@
+require './errors.rb'
+
 class CurrencyConverter
 
   def initialize(rates)
     @rates = rates
+  end
+
+  def rates
+    @rates
   end
 
   def find_rate(code)
@@ -13,7 +19,4 @@ class CurrencyConverter
     (@rates[new_code] && @rates[currency.code.to_sym]) ? (Currency.new(converted_total, new_code.to_s)) : (raise UnknownCurrencyCodeError)
   end
 
-end
-
-class UnknownCurrencyCodeError < StandardError
 end

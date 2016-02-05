@@ -1,3 +1,5 @@
+require './errors.rb'
+
 class Currency
 
   def initialize(amount, currency_code = "")
@@ -44,10 +46,4 @@ class Currency
     Currency.new(@amount * number, @code)
   end
 
-end
-
-class DifferentCurrencyCodeError < StandardError
-  def initialize(msg="Cannot add or subtract currencies with different codes")
-    super
-  end
 end

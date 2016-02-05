@@ -1,5 +1,6 @@
 require './currency.rb'
 require './currency_converter.rb'
+require './currency_trader.rb'
 
 usd_one = Currency.new(10, :USD)
 usd_two = Currency.new(15, :USD)
@@ -14,12 +15,15 @@ puts "#{usd_four.amount} #{usd_four.code}"
 usd = usd_four.multiply(4)
 puts "#{usd.amount} #{usd.code}"
 
+old_value = CurrencyConverter.new({USD: 1, EUR: 0.767, GBP: 0.642, AUD: 1.353, CAD: 1.355, JPY: 102.162})
+present_value = CurrencyConverter.new({USD: 1, EUR: 0.898, GBP: 0.556, AUD: 1.433, CAD: 1.322, JPY: 119.863})
+# #
+# # monday = CurrencyConverter.new(rates)
+# # tuesday = CurrencyConverter.new(rates_tomorrow)
+# # usd_to_cad = monday.convert(usd, :EUR)
+#
+# puts usd_to_cad.amount
+# puts usd_to_cad.code
 
-rates = {USD: 1.00, EUR: 0.74, JPY: 120.0, CAD: 1.37}
-rates_tomorrow = {USD: 1.00, EUR: 0.64, JPY: 130.0, CAD: 1.17}
-
-monday_rates = CurrencyConverter.new(rates)
-usd_to_cad = monday_rates.convert(usd, :CAD)
-
-puts usd_to_cad.amount
-puts usd_to_cad.code
+trader = CurrencyTrader.new(old_value, present_value, usd_one)
+puts "#{trader.trade}!"
