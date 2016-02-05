@@ -1,7 +1,7 @@
 class CurrencyConverter
 
-  def initialize
-    @rates = {USD: 1.00, EUR: 0.74, JPY: 120.0, CAD: 1.37}
+  def initialize(rates)
+    @rates = rates
   end
 
   def find_rate(code)
@@ -10,7 +10,7 @@ class CurrencyConverter
 
   def convert(currency, new_code)
     converted_total = currency.amount.to_f * (find_rate(new_code) / find_rate(currency.code.to_sym))
-    (@rates[new_code] && @rates[currency.code.to_sym]) ? (coverted_currency = Currency.new(converted_total, new_code.to_s)) : (raise UnknownCurrencyCodeError)
+    (@rates[new_code] && @rates[currency.code.to_sym]) ? (Currency.new(converted_total, new_code.to_s)) : (raise UnknownCurrencyCodeError)
   end
 
 end

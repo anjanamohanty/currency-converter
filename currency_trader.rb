@@ -5,5 +5,7 @@ class CurrencyTrader
     @currency = currency
   end
 
-  
+  def suggest_trade
+  end
+
 end

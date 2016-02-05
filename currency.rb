@@ -13,7 +13,9 @@ class Currency
     @amount.each_char do |x|
       if symbol_hash[x]
         @code = symbol_hash[x].to_s
-        @amount.tr!(x, "").to_i
+        @amount = @amount.tr!(x, "").to_i
+      else
+        @amount = @amount.to_i
       end
     end
   end
@@ -31,16 +33,15 @@ class Currency
   end
 
   def add(other)
-    (@code == other.code) ? (@amount += other.amount) : (raise DifferentCurrencyCodeError)
+    (@code == other.code) ? Currency.new((@amount += other.amount), @code) : (raise DifferentCurrencyCodeError)
   end
 
   def subtract(other)
-    (@code == other.code) ? (@amount -= other.amount) : (raise DifferentCurrencyCodeError)
+    (@code == other.code) ? Currency.new((@amount -= other.amount), @code) : (raise DifferentCurrencyCodeError)
   end
 
   def multiply(number)
-    @amount = @amount * number
-    self
+    Currency.new(@amount * number, @code)
   end
 
 end
