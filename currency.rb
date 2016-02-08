@@ -30,19 +30,23 @@ class Currency
     @code
   end
 
-  def equals?(other)
+  def ==(other)
     (@amount == other.amount) && (@code == other.code) ? true : false
   end
 
-  def add(other)
+  def !=(other)
+    (@amount != other.amount) && (@code != other.code) ? true : false
+  end
+
+  def +(other)
     (@code == other.code) ? Currency.new((@amount += other.amount), @code) : (raise DifferentCurrencyCodeError)
   end
 
-  def subtract(other)
+  def -(other)
     (@code == other.code) ? Currency.new((@amount -= other.amount), @code) : (raise DifferentCurrencyCodeError)
   end
 
-  def multiply(number)
+  def *(number)
     Currency.new(@amount * number, @code)
   end
 

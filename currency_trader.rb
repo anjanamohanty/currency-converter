@@ -4,28 +4,24 @@ class CurrencyTrader
     @currency = currency
   end
 
-  def trade
-    trades = []
-    trades[0] = @currency.code
+  def get_all_rates
+    all_trades = {}
     @converter_array.length.times do |i|
       break if (i+1) == @converter_array.length
-      trades[i+1] = get_best_trade(i, trades[i])
+      trades = {}
+      @converter_array[0].rates.each{ |key, value|
+        trades[key] = get_rates(i, key)
+      }
+      all_trades[i] = trades
     end
-    puts trades
-
-    # trades.length.times do |i|
-    #   break if (i+1) == trades.length
-    #   puts "You should invest in #{trades}"
+    puts all_trades
   end
 
-  def get_best_trade(i, current_currency)
+  def get_rates(i, current_currency)
     rates = {}
     @converter_array[i].rates.each{ |key, value|
       rates[key] = ((@converter_array[i].rates[key] / @converter_array[i].rates[current_currency.to_sym]) * (@converter_array[i+1].rates[current_currency.to_sym] / @converter_array[i+1].rates[key]))
     }
-    best_trade = rates.key(rates.values.max)
-    best_trade_rate = rates[best_trade]
-    puts "#{best_trade} #{best_trade_rate}"
-    return best_trade
+    rates
   end
 end
